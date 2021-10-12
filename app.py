@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 #################################################
 # Import Packages
 #################################################
@@ -75,7 +69,7 @@ def precipitation():
     date_one_year_ago = dt.date(last_date.year - 1, last_date.month, last_date.day)
 
     # Perform a query to retrieve the data and precipitation scores
-    precipitation_results = session.query(Measurement.date, Measurement.prcp).    filter(Measurement.date >= date_one_year_ago).order_by(Measurement.date).all()
+    precipitation_results = session.query(Measurement.date, Measurement.prcp).filter(Measurement.date >= date_one_year_ago).order_by(Measurement.date).all()
 
     # Close the session
     session.close()
@@ -116,7 +110,7 @@ def tobs():
     session = Session(engine)
 
     # Find the most active station id
-    query = session.query(Measurement.station, func.count(Measurement.station)).    group_by(Measurement.station).order_by(func.count(Measurement.station).desc()).limit(1).all()
+    query = session.query(Measurement.station, func.count(Measurement.station)).group_by(Measurement.station).order_by(func.count(Measurement.station).desc()).limit(1).all()
 
     most_active_station_id = query[0][0]
 
@@ -131,7 +125,7 @@ def tobs():
     date_one_year_ago = dt.date(last_date.year - 1, last_date.month, last_date.day)
 
     # Find the results from the last year of data for this station id
-    tobs_results = session.query(Measurement.date, Measurement.tobs).    filter(Measurement.date >= date_one_year_ago, Measurement.station==most_active_station_id).    order_by(Measurement.date.asc()).all()
+    tobs_results = session.query(Measurement.date, Measurement.tobs).filter(Measurement.date >= date_one_year_ago, Measurement.station==most_active_station_id).order_by(Measurement.date.asc()).all()
 
     # Close the session
     session.close 
@@ -148,7 +142,7 @@ def tobs():
 
 
 @app.route(f'/api/v1.0/<start>')
-def start_date(start=None):       
+def start_date(start):       
     # Create our session (link) from Python to the DB
     session = Session(engine)
     
@@ -187,7 +181,7 @@ def start_date(start=None):
         
 
 @app.route(f'/api/v1.0/<start>/<end>')
-def start_end_period(start=None,end=None):
+def start_end_period(start,end):
     # Create our session (link) from Python to the DB
     session = Session(engine)
     
@@ -210,9 +204,9 @@ def start_end_period(start=None,end=None):
     elif(end_date < first_date_object or end_date > last_date_object):
         return f"Please don't enter an end date earlier than {first_date_object} or later than {last_date_object}."
     else: 
-        highest_temp = session.query(func.max(Measurement.tobs)).                        filter(Measurement.date >= start_date, Measurement.date <= end_date).all()
-        lowest_temp = session.query(func.min(Measurement.tobs)).                          filter(Measurement.date >= start_date, Measurement.date <= end_date).all()
-        average_temp = session.query(func.avg(Measurement.tobs)).                        filter(Measurement.date >= start_date, Measurement.date <= end_date).all()
+        highest_temp = session.query(func.max(Measurement.tobs)).filter(Measurement.date >= start_date, Measurement.date <= end_date).all()
+        lowest_temp = session.query(func.min(Measurement.tobs)).filter(Measurement.date >= start_date, Measurement.date <= end_date).all()
+        average_temp = session.query(func.avg(Measurement.tobs)).filter(Measurement.date >= start_date, Measurement.date <= end_date).all()
         
         temperature_dict = {
             "TMIN" : lowest_temp[0][0],
@@ -228,9 +222,6 @@ def start_end_period(start=None,end=None):
     
 if __name__ == '__main__':
     app.run(debug=False)
-
-
-# In[ ]:
 
 
 
