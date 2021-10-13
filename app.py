@@ -44,12 +44,12 @@ app = Flask(__name__)
 def welcome():
     """List all available api routes."""
     return (
-        "Available Routes:<br/>"
-        "/api/v1.0/precipitation<br/>"
-        "/api/v1.0/stations<br/>"
-        "/api/v1.0/tobs<br/>"
-        "/api/v1.0/{start_date}<br/>"
-        "/api/v1.0/{start_date}/{end_date}"
+        f"Available Routes:<br/>"
+        f"/api/v1.0/precipitation<br/>"
+        f"/api/v1.0/stations<br/>"
+        f"/api/v1.0/tobs<br/>"
+        f"/api/v1.0/start_date_parameter<br/>"
+        f"/api/v1.0/start_date_parameter/end_date_parameter"
     )
 
 
@@ -222,7 +222,4 @@ def start_end_period(start,end):
     
 if __name__ == '__main__':
     app.run(debug=False)
-
-
-
-
+    
