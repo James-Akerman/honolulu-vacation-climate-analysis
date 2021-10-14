@@ -176,7 +176,7 @@ def start_date(start):
         return jsonify(start_temperature_dict)
         
     # Close the session
-    session.close 
+    session.close()
      
         
 
@@ -216,7 +216,7 @@ def start_end_period(start,end):
         return jsonify(temperature_dict)
 
     # Close the session
-    session.close 
+    session.close()
     
 
     
