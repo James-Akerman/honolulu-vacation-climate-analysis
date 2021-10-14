@@ -61,8 +61,8 @@ def precipitation():
     
     """Convert the query results to a dictionary using date as the key and prcp as the value."""
     # Calculate the date 1 year ago from the last data point in the database
-    qry_last_row = 'SELECT date FROM measurement m ORDER BY m.id DESC LIMIT 1'
-    last_row = engine.execute(qry_last_row).fetchall()
+    last_row = session.query(Measurement.date).order_by(Measurement.id.desc()).limit(1).all()
+    session.close() # Close the connection
     last_date_point = last_row[0][0] # the last date in the data set
 
     last_date = dt.datetime.strptime(last_date_point,'%Y-%m-%d') # convert the last date from a string to a datetime object
@@ -91,8 +91,8 @@ def station():
     session = Session(engine)
     
     # query the data
-    stations = session.query(Station.station, Station.name, Station.latitude, Station.longitude, Station.elevation ).all()
-    session.close()
+    stations = session.query(Station.station, Station.name, Station.latitude, Station.longitude, Station.elevation).all()
+    session.close() # Close the session
     
     # convert it to a dictionary
     station_dict = {}
@@ -110,13 +110,13 @@ def tobs():
     session = Session(engine)
 
     # Find the most active station id
-    query = session.query(Measurement.station, func.count(Measurement.station)).group_by(Measurement.station).order_by(func.count(Measurement.station).desc()).limit(1).all()
+    query_station = session.query(Measurement.station, func.count(Measurement.station)).group_by(Measurement.station).order_by(func.count(Measurement.station).desc()).limit(1).all()
 
-    most_active_station_id = query[0][0]
+    most_active_station_id = query_station[0][0]
 
     # Find the last date mentioned for station 'USC00519281'
-    qry_last_row = f"SELECT date, tobs FROM measurement m WHERE m.station == '{most_active_station_id}' ORDER BY m.id DESC LIMIT 1"
-    last_row = engine.execute(qry_last_row).fetchall()
+    last_row = session.query(Measurement.date,Measurement.tobs).filter(Measurement.station == most_active_station_id).order_by(Measurement.id.desc()).limit(1).all()
+
     last_date_point = last_row[0][0] # the last date in the data set
     last_date_point
 
@@ -128,7 +128,7 @@ def tobs():
     tobs_results = session.query(Measurement.date, Measurement.tobs).filter(Measurement.date >= date_one_year_ago, Measurement.station==most_active_station_id).order_by(Measurement.date.asc()).all()
 
     # Close the session
-    session.close 
+    session.close()
     
     # Convert query to a dictionary 
     tobs_dict = {}
