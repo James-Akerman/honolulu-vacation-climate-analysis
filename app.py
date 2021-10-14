@@ -155,6 +155,8 @@ def start_date(start):
     # Check if the date is valid
     first_date = session.query(Measurement.date).order_by(Measurement.id.asc()).limit(1).all()
     last_date = session.query(Measurement.date).order_by(Measurement.id.desc()).limit(1).all()
+    # Close the session
+    session.close()
  
     first_date_object = dt.datetime.strptime(first_date[0][0],'%Y-%m-%d').date()
     last_date_object = dt.datetime.strptime(last_date[0][0],'%Y-%m-%d').date()
@@ -167,6 +169,8 @@ def start_date(start):
         highest_temp = session.query(func.max(Measurement.tobs)).filter(Measurement.date >= start_date).all()
         lowest_temp = session.query(func.min(Measurement.tobs)).filter(Measurement.date >= start_date).all()
         average_temp = session.query(func.avg(Measurement.tobs)).filter(Measurement.date >= start_date).all()
+        # Close the session
+        session.close()
 
         start_temperature_dict = {
             "TMIN" : lowest_temp[0][0],
@@ -174,9 +178,6 @@ def start_date(start):
             "TMAX" : highest_temp[0][0]
         }
         return jsonify(start_temperature_dict)
-        
-    # Close the session
-    session.close()
      
         
 
@@ -195,6 +196,8 @@ def start_end_period(start,end):
     # Check if the date is valid
     first_date = session.query(Measurement.date).order_by(Measurement.id.asc()).limit(1).all()
     last_date = session.query(Measurement.date).order_by(Measurement.id.desc()).limit(1).all()
+    # Close the session
+    session.close()
  
     first_date_object = dt.datetime.strptime(first_date[0][0],'%Y-%m-%d').date()
     last_date_object = dt.datetime.strptime(last_date[0][0],'%Y-%m-%d').date()
@@ -207,6 +210,8 @@ def start_end_period(start,end):
         highest_temp = session.query(func.max(Measurement.tobs)).filter(Measurement.date >= start_date, Measurement.date <= end_date).all()
         lowest_temp = session.query(func.min(Measurement.tobs)).filter(Measurement.date >= start_date, Measurement.date <= end_date).all()
         average_temp = session.query(func.avg(Measurement.tobs)).filter(Measurement.date >= start_date, Measurement.date <= end_date).all()
+        # Close the session
+        session.close()
         
         temperature_dict = {
             "TMIN" : lowest_temp[0][0],
@@ -214,12 +219,8 @@ def start_end_period(start,end):
             "TMAX" : highest_temp[0][0],
         }
         return jsonify(temperature_dict)
-
-    # Close the session
-    session.close()
     
 
     
 if __name__ == '__main__':
     app.run(debug=False)
-
