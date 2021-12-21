@@ -30,7 +30,7 @@ For this analysis I did the following
 
 For this analysis I did the following
 
-* Design a query to calculate the total number of stations.
+* Designed a query to calculate the total number of stations.
 
 * Designed a query to find the most active stations.
 
@@ -69,7 +69,7 @@ I then designed a Flask API based on the queries that I had just developed and c
   * Returns a JSON list of stations from the dataset.
 
 * `/api/v1.0/tobs`
-  * Query the dates and temperature observations of the most active station for the last year of data.
+  * Queried the dates and temperature observations of the most active station for the last year of data.
   
   * Returns a JSON list of temperature observations (TOBS) for the previous year.
 
