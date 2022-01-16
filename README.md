@@ -1,4 +1,4 @@
-# sqlalchemy-challenge
+# Honolulu Vacation Climate Analysis
 
 In this Monash Data Analytics Boot Camp/Trilogy Education Services homework, I imagined that I had decided to treat myself to a long holiday vacation in Honolulu, Hawaii! To help with my trip planning, I needed to do some climate analysis on the area. The following outlines what I needed to do.
 
@@ -80,3 +80,11 @@ I then designed a Flask API based on the queries that I had just developed and c
   * When given the start only, it calculates `TMIN`, `TAVG`, and `TMAX` for all dates greater than and equal to the start date.
 
   * When given the start and the end date, it calculates the `TMIN`, `TAVG`, and `TMAX` for dates between the start and end date inclusive.
+
+<br>
+
+## Tools/Packages used
+
+<br>
+
+## How to run
