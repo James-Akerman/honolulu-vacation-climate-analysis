@@ -1,6 +1,6 @@
 # Honolulu Vacation Climate Analysis
 
-In this Monash Data Analytics Boot Camp/Trilogy Education Services homework, I imagined that I had decided to treat myself to a long holiday vacation in Honolulu, Hawaii! To help with my trip planning, I needed to do some climate analysis on the area. The following outlines what I needed to do.
+A repository which explores and analyses the climate of Honolulu, Hawaii
 
 ## Step 1 - Climate Analysis and Exploration
 
