@@ -1,5 +1,6 @@
 # Honolulu Vacation Climate Analysis
 
+## Overview of the Project
 A repository which explores and analyses the climate of Honolulu, Hawaii.
 
 ## Part I - Climate Analysis and Exploration
