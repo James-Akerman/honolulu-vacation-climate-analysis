@@ -1,90 +1,55 @@
 # Honolulu Vacation Climate Analysis
 
-A repository which explores and analyses the climate of Honolulu, Hawaii
+A repository which explores and analyses the climate of Honolulu, Hawaii.
 
-## Step 1 - Climate Analysis and Exploration
+## Part I - Climate Analysis and Exploration
+A jupyter notebook which conducts climate analysis and exploration on weather from Honolulu, Hawaii
 
-To begin, I used Python and SQLAlchemy to do basic climate analysis and data exploration of your climate database. All of the following analysis were completed using SQLAlchemy ORM queries, Pandas, and Matplotlib.
+#### Precipitation Analysis
+![precipitation in honolulu](images/precipitation-in-honolulu.PNG)
 
-* I chose a start date and end date for my trip.
+<br>
 
-* I used the SQLAlchemy `create_engine` to connect to my sqlite database.
+#### Station Analysis
+An analysis of station measuresments including the last 12 months of temperature observation data (TOBS).
+![temperature histogram](images/temperature-observations-histogram.PNG)
 
-* I used the SQLAlchemy `automap_base()` to reflect my tables into classes and save a reference to those classes called `Station` and `Measurement`.
+<br>
 
-### Precipitation Analysis
+#### Vacation Minimum, Maximum, and Average Temperature
+![vacation temperatures](images/vacation-temperatures.PNG)
 
-For this analysis I did the following
+<br>
 
-* Designed a query to retrieve the last 12 months of precipitation data.
-
-* Selected only the `date` and `prcp` values.
-
-* Loaded the query results into a Pandas DataFrame and set the index to the date column.
-
-* Sorted the DataFrame values by `date`.
-
-* Finally, I used Pandas to print the summary statistics for the precipitation data.
-
-### Station Analysis
-
-For this analysis I did the following
-
-* Designed a query to calculate the total number of stations.
-
-* Designed a query to find the most active stations.
-
-  * Listed the stations and observation counts in descending order.
-
-  * Found which station had the highest number of observations.
-
-* Designed a query to retrieve the last 12 months of temperature observation data (TOBS).
-
-  * Filtered by the station with the highest number of observations.
-
-  * Plotted the results as a histogram with `bins=12`.
-
-- - -
-
-## Step 2 - Climate App
-
-I then designed a Flask API based on the queries that I had just developed and created the following routes
-
-### Routes
-
-* `/`
-
-  * Home page.
-
-  * List all routes that are available.
-
-* `/api/v1.0/precipitation`
-
-  * Converts the query results to a dictionary using `date` as the key and `prcp` as the value.
-
-  * Returns the JSON representation of your dictionary.
-
-* `/api/v1.0/stations`
-
-  * Returns a JSON list of stations from the dataset.
-
-* `/api/v1.0/tobs`
-  * Queried the dates and temperature observations of the most active station for the last year of data.
-  
-  * Returns a JSON list of temperature observations (TOBS) for the previous year.
-
-* `/api/v1.0/<start>` and `/api/v1.0/<start>/<end>`
-
-  * Returns a JSON list of the minimum temperature, the average temperature, and the max temperature for a given start or start-end range.
-
-  * When given the start only, it calculates `TMIN`, `TAVG`, and `TMAX` for all dates greater than and equal to the start date.
-
-  * When given the start and the end date, it calculates the `TMIN`, `TAVG`, and `TMAX` for dates between the start and end date inclusive.
+## Part II - Climate App
+A Flask app which queries an [sqlite database](Resources/hawaii.sqlite) based on the following routes:
+- `/`
+  - List all routes that are available.
+- `/api/v1.0/precipitation`
+  - Converts the query results to a dictionary using `date` as the key and `prcp` as the value.
+  - Returns the JSON representation of your dictionary.
+- `/api/v1.0/stations`
+  - Returns a JSON list of stations from the dataset.
+- `/api/v1.0/tobs`
+  - Queried the dates and temperature observations of the most active station for the last year of data.
+  - Returns a JSON list of temperature observations (TOBS) for the previous year.
+- `/api/v1.0/<start>` and `/api/v1.0/<start>/<end>`
+  - Returns a JSON list of the minimum temperature, the average temperature, and the max temperature for a given start or start-end range.
+  - When given the start only, it calculates `TMIN`, `TAVG`, and `TMAX` for all dates greater than and equal to the start date.
+  - When given the start and the end date, it calculates the `TMIN`, `TAVG`, and `TMAX` for dates between the start and end date inclusive.
 
 <br>
 
 ## Tools/Packages used
+- Python
+  - Pandas
+  - Matplotlib
+  - Sqlalchemy
+- Sqlite
 
 <br>
 
 ## How to run
+1) Download the repository.
+2) To run Part I, open Git Bash and type `jupyter notebook` then open the `Surfs_Up_Analysis_James_Akerman.ipynb` notebook.
+3) To run Part II open Git Bash and type `python app.py` then go the your local host url, e.g. `localhost:8000/`.
