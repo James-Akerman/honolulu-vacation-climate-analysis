@@ -3,7 +3,7 @@
 ## Overview of the Project
 A repository which explores and analyses the climate of Honolulu, Hawaii.
 
-## Part I - Climate Analysis and Exploration
+### Part I - Climate Analysis and Exploration
 A jupyter notebook which conducts climate analysis and exploration on weather from Honolulu, Hawaii
 
 #### Precipitation Analysis
@@ -22,7 +22,7 @@ An analysis of station measuresments including the last 12 months of temperature
 
 <br>
 
-## Part II - Climate App
+### Part II - Climate App
 A Flask app which queries an [sqlite database](Resources/hawaii.sqlite) based on the following routes:
 - `/`
   - List all routes that are available.
